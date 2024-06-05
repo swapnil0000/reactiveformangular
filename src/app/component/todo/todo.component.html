@@ -1,0 +1,32 @@
+<div class="todo-container">
+   <h4 style="color: white; font-size:  50px; font-family: 'Times New Roman', Times, serif;font-weight: 900;">Todo List</h4>
+  <div class="tododiv" >
+  <div>
+  <form [formGroup]="todoForm" (ngSubmit)="addTodo()">
+    <img style="width: 300px; height: auto; border-radius: 20px;margin: 10px;" src="/assets/6206973.jpg" alt="logo"/>
+    <input id="task" formControlName="task" placeholder="Enter task">
+    <button type="submit" [disabled]="todoForm.invalid">Add Todo</button>
+  </form>
+</div>
+
+<div>
+
+  <form *ngIf="isEditing" [formGroup]="editForm" (ngSubmit)="editTodo()">
+    <label for="edit-task">Edit Task</label>
+    <input id="edit-task" formControlName="task" placeholder="Edit task">
+    <button type="submit" [disabled]="editForm.invalid">Save Changes</button>
+    <button type="button" (click)="isEditing = false">Cancel</button>
+  </form>
+
+  <ul>
+    <li *ngFor="let todo of todos; index as i">
+      {{ todo }}
+      <div>
+      <button style="margin: 5px;" (click)="startEdit(i)">Edit</button>
+      <button (click)="removeTodo(i)">Remove</button>
+    </div>
+    </li>
+  </ul>
+</div>
+</div>
+</div>
